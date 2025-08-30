@@ -11,12 +11,8 @@ body {
 }
 
 @keyframes backgroundGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 .site-header {
@@ -40,6 +36,43 @@ body {
   animation: fadeInSlide 1.8s ease forwards;
 }
 
+/* Birds animation */
+.bird {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  width: 60px;
+  opacity: 0.8;
+  animation-name: flyHorizontally;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  user-select: none;
+}
+
+@keyframes flyHorizontally {
+  from { left: -80px; }
+  to { left: 110%; }
+}
+
+/* Balloons animation */
+.balloon {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  width: 50px;
+  opacity: 0.7;
+  animation-name: floatUp;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  user-select: none;
+}
+
+@keyframes floatUp {
+  from { bottom: -60px; }
+  to { bottom: 110%; }
+}
+
+/* Upload section styling */
 .upload-section input,
 .upload-section button {
   font-size: 1rem;
@@ -73,6 +106,7 @@ body {
   transform: scale(1.1);
 }
 
+/* Gallery styling */
 .gallery {
   display: flex;
   flex-wrap: wrap;
@@ -103,21 +137,11 @@ body {
 }
 
 @keyframes glow {
-  0% {
-    text-shadow: 0 0 12px #5577ffaa;
-  }
-  100% {
-    text-shadow: 0 0 34px #aab9ffcc;
-  }
+  0% { text-shadow: 0 0 12px #5577ffaa; }
+  100% { text-shadow: 0 0 34px #aab9ffcc; }
 }
 
 @keyframes fadeInSlide {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
