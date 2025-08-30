@@ -1,0 +1,129 @@
+body {
+  background-color: #12131e;
+  color: #eee;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+.site-header {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #82aaff;
+  margin-bottom: 30px;
+  letter-spacing: 3px;
+  text-shadow: 0 0 12px #5577ffaa;
+  user-select: none;
+  animation: glow 1.6s ease-in-out infinite alternate;
+}
+
+.cover-photo {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  margin-bottom: 20px;
+  animation: fadeInSlide 1.8s ease forwards;
+}
+
+h1 {
+  margin-top: 12px;
+  animation: fadeInText 2s ease forwards;
+}
+
+.upload-section {
+  margin-bottom: 24px;
+}
+
+.upload-label {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #aac8ff;
+  transition: color 0.3s ease;
+}
+.upload-label:hover {
+  color: #e0eaff;
+}
+
+input[type='file'] {
+  background: #2a2c3e;
+  padding: 12px 20px;
+  border-radius: 18px;
+  border: none;
+  color: #eee;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 8px #000000aa;
+  transition: background 0.3s ease;
+}
+input[type='file']:hover {
+  background: #3c3f58;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.photo {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 0 14px #5577ffcc;
+  cursor: pointer;
+  transform: scale(0);
+  animation: fadeInScale 0.5s forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 28px #aad4ffdd;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 12px #5577ffaa;
+  }
+  to {
+    text-shadow: 0 0 34px #aab9ffcc;
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  to {
+    transform: scale(1);
+  }
+}
