@@ -11,12 +11,8 @@ body {
 }
 
 @keyframes backgroundGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 .site-header {
@@ -35,7 +31,7 @@ body {
   max-height: 400px;
   object-fit: cover;
   border-radius: 15px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
   margin-bottom: 20px;
   animation: fadeInSlide 1.8s ease forwards;
 }
@@ -144,72 +140,41 @@ body {
   text-shadow: 0 0 10px #aad4ff88;
 }
 
-/* Animated birds and balloons */
-
-.bird,
-.balloon {
+.bird, .balloon {
   position: fixed;
   pointer-events: none;
   user-select: none;
-  z-index: 1;
+  z-index: 0;
+  width: 60px;
+  opacity: 0.8;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 .bird {
-  width: 60px;
-  opacity: 0.8;
   animation-name: flyHorizontally;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-
-.bird:nth-child(1) {
-  animation-duration: 25s;
-  top: 25%;
-  left: -80px;
-}
-
-.bird:nth-child(2) {
-  animation-duration: 35s;
-  top: 40%;
-  left: -80px;
-  animation-delay: 6s;
-}
-
-@keyframes flyHorizontally {
-  0% {
-    left: -80px;
-  }
-  100% {
-    left: 110%;
-  }
 }
 
 .balloon {
   width: 50px;
   opacity: 0.7;
   animation-name: floatUp;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  bottom: -60px;
-  left: 30%;
 }
 
-.balloon:nth-child(3) {
-  animation-duration: 20s;
-  left: 30%;
-}
-
-.balloon:nth-child(4) {
-  animation-duration: 28s;
-  left: 60%;
-  animation-delay: 7s;
+@keyframes flyHorizontally {
+  from {
+    left: -80px;
+  }
+  to {
+    left: 110%;
+  }
 }
 
 @keyframes floatUp {
-  0% {
+  from {
     bottom: -60px;
   }
-  100% {
+  to {
     bottom: 110%;
   }
 }
@@ -224,11 +189,11 @@ body {
 }
 
 @keyframes fadeInSlide {
-  0% {
+  from {
     opacity: 0;
     transform: translateY(30px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
