@@ -72,7 +72,7 @@ body {
   to { bottom: 110%; }
 }
 
-/* Upload section styling */
+/* Upload buttons and input */
 .upload-section input,
 .upload-section button {
   font-size: 1rem;
@@ -106,7 +106,7 @@ body {
   transform: scale(1.1);
 }
 
-/* Gallery styling */
+/* Gallery */
 .gallery {
   display: flex;
   flex-wrap: wrap;
@@ -134,6 +134,20 @@ body {
 .photo:hover {
   transform: scale(1.1);
   box-shadow: 0 0 38px #aad4ffdd;
+}
+
+.download-link {
+  display: inline-block;
+  margin-top: 6px;
+  color: #82aaff;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 700;
+  user-select: none;
+}
+
+.download-link:hover {
+  color: #3355ff;
 }
 
 @keyframes glow {
