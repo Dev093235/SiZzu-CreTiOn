@@ -1,21 +1,21 @@
 body {
-  background-color: #12131e;
+  background: #12131e;
   color: #eee;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
   text-align: center;
   margin: 0;
-  padding: 20px;
 }
 
 .site-header {
   font-size: 2.8rem;
   font-weight: 900;
+  letter-spacing: 3px;
   color: #82aaff;
   margin-bottom: 30px;
-  letter-spacing: 3px;
-  text-shadow: 0 0 12px #5577ffaa;
+  text-shadow: 0 0 20px #7744ffaa;
   user-select: none;
-  animation: glow 1.6s ease-in-out infinite alternate;
+  animation: glow 2s alternate infinite ease-in-out;
 }
 
 .cover-photo {
@@ -23,107 +23,134 @@ body {
   max-height: 400px;
   object-fit: cover;
   border-radius: 15px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 15px 32px rgba(0,0,0,0.6);
   animation: fadeInSlide 1.8s ease forwards;
-}
-
-h1 {
-  margin-top: 12px;
-  animation: fadeInText 2s ease forwards;
 }
 
 .upload-section {
   margin-bottom: 24px;
 }
 
-.upload-label {
-  display: inline-block;
-  margin-bottom: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  color: #aac8ff;
-  transition: color 0.3s ease;
-}
-.upload-label:hover {
-  color: #e0eaff;
-}
-
-input[type='file'] {
-  background: #2a2c3e;
+.upload-section input,
+.upload-section button {
+  font-size: 1rem;
+  margin: 0 10px 20px 0;
   padding: 12px 20px;
   border-radius: 18px;
   border: none;
-  color: #eee;
-  font-weight: 600;
-  cursor: pointer;
   outline: none;
-  box-shadow: 0 4px 8px #000000aa;
-  transition: background 0.3s ease;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
 }
-input[type='file']:hover {
-  background: #3c3f58;
+
+.upload-section input {
+  background: #2a2c3e;
+  color: #eee;
+}
+
+.upload-section input:hover {
+  background: #3a3c50;
+}
+
+.upload-section button {
+  background: #5577ffcc;
+  color: white;
+  font-weight: 700;
+}
+
+.upload-section button:hover {
+  background: #3355ff;
 }
 
 .gallery {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 14px;
+  gap: 18px;
   max-width: 960px;
-  margin: 0 auto;
+  margin: auto;
+}
+
+.photo-box {
+  display: inline-block;
+  text-align: center;
+  width: 180px;
+  user-select: none;
 }
 
 .photo {
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 0 14px #5577ffcc;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 0 18px #5577ffcc;
   cursor: pointer;
-  transform: scale(0);
-  animation: fadeInScale 0.5s forwards;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .photo:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 28px #aad4ffdd;
+  transform: scale(1.1);
+  box-shadow: 0 0 38px #aad4ffdd;
+}
+
+.download-btn {
+  margin-top: 6px;
+  background: #3355ffcc;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 1rem;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  width: 100%;
+}
+
+.download-btn:hover {
+  background: #2233cc;
+}
+
+.latest-link {
+  margin: 20px auto;
+  max-width: 600px;
+  background: #223344bb;
+  padding: 16px 20px;
+  border-radius: 10px;
+  color: #eef;
+  font-weight: 700;
+  text-align: center;
+}
+
+.latest-link a {
+  color: #aad4ff;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.latest-link a:hover {
+  color: #eee;
+  text-shadow: 0 0 10px #aad4ff88;
 }
 
 @keyframes glow {
-  from {
-    text-shadow: 0 0 12px #5577ffaa;
+  0% {
+    text-shadow: 0 0 20px #7744ffaa;
   }
-  to {
-    text-shadow: 0 0 34px #aab9ffcc;
+  100% {
+    text-shadow: 0 0 48px #5577ffcc;
   }
 }
 
 @keyframes fadeInSlide {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes fadeInText {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInScale {
-  to {
-    transform: scale(1);
   }
 }
