@@ -1,18 +1,28 @@
 body {
   position: relative;
-  overflow-x: hidden;
-  background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
-  animation: backgroundGradient 15s ease infinite alternate;
-  color: #eee;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+
+  /* Transparent background image */
+  background-image: url('assets/background.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  background-attachment: fixed;
+
+  color: #eee;
   margin: 0;
   padding: 20px;
   text-align: center;
 }
 
-@keyframes backgroundGradient {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .site-header {
@@ -72,7 +82,6 @@ body {
   to { bottom: 110%; }
 }
 
-/* Upload buttons and input */
 .upload-section input,
 .upload-section button {
   font-size: 1rem;
@@ -106,7 +115,6 @@ body {
   transform: scale(1.1);
 }
 
-/* Gallery */
 .gallery {
   display: flex;
   flex-wrap: wrap;
