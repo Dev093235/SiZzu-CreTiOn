@@ -1,21 +1,29 @@
 body {
-  background: #12131e;
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+  animation: backgroundGradient 15s ease infinite alternate;
   color: #eee;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
   padding: 20px;
   text-align: center;
-  margin: 0;
+}
+
+@keyframes backgroundGradient {
+  0% {background-position: 0% 50%;}
+  100% {background-position: 100% 50%;}
 }
 
 .site-header {
   font-size: 2.8rem;
   font-weight: 900;
-  letter-spacing: 3px;
   color: #82aaff;
   margin-bottom: 30px;
-  text-shadow: 0 0 20px #7744ffaa;
+  letter-spacing: 3px;
+  text-shadow: 0 0 12px #5577ffaa;
   user-select: none;
-  animation: glow 2s alternate infinite ease-in-out;
+  animation: glow 1.6s ease-in-out infinite alternate;
 }
 
 .cover-photo {
@@ -23,13 +31,9 @@ body {
   max-height: 400px;
   object-fit: cover;
   border-radius: 15px;
-  margin-bottom: 30px;
-  box-shadow: 0 15px 32px rgba(0,0,0,0.6);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  margin-bottom: 20px;
   animation: fadeInSlide 1.8s ease forwards;
-}
-
-.upload-section {
-  margin-bottom: 24px;
 }
 
 .upload-section input,
@@ -41,8 +45,8 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   user-select: none;
+  transition: background-color 0.3s;
 }
 
 .upload-section input {
@@ -62,6 +66,7 @@ body {
 
 .upload-section button:hover {
   background: #3355ff;
+  transform: scale(1.1);
 }
 
 .gallery {
@@ -75,8 +80,8 @@ body {
 
 .photo-box {
   display: inline-block;
-  text-align: center;
   width: 180px;
+  text-align: center;
   user-select: none;
 }
 
@@ -85,7 +90,7 @@ body {
   border-radius: 16px;
   box-shadow: 0 0 18px #5577ffcc;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .photo:hover {
@@ -104,8 +109,8 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  user-select: none;
   width: 100%;
+  user-select: none;
 }
 
 .download-btn:hover {
@@ -125,8 +130,8 @@ body {
 
 .latest-link a {
   color: #aad4ff;
-  text-decoration: none;
   font-weight: 900;
+  text-decoration: none;
   font-size: 1.1rem;
 }
 
@@ -135,21 +140,90 @@ body {
   text-shadow: 0 0 10px #aad4ff88;
 }
 
-@keyframes glow {
+/* Animated birds and balloons */
+
+.bird, .balloon {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+.bird {
+  width: 60px;
+  opacity: 0.8;
+  animation-name: flyHorizontally;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.bird:nth-child(1) {
+  animation-duration: 25s;
+  top: 25%;
+  left: -80px;
+}
+
+.bird:nth-child(2) {
+  animation-duration: 35s;
+  top: 40%;
+  left: -80px;
+  animation-delay: 6s;
+}
+
+@keyframes flyHorizontally {
   0% {
-    text-shadow: 0 0 20px #7744ffaa;
+    left: -80px;
   }
   100% {
-    text-shadow: 0 0 48px #5577ffcc;
+    left: 110%;
+  }
+}
+
+.balloon {
+  width: 50px;
+  opacity: 0.7;
+  animation-name: floatUp;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  bottom: -60px;
+  left: 30%;
+}
+
+.balloon:nth-child(3) {
+  animation-duration: 20s;
+  left: 30%;
+}
+
+.balloon:nth-child(4) {
+  animation-duration: 28s;
+  left: 60%;
+  animation-delay: 7s;
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: -60px;
+  }
+  100% {
+    bottom: 110%;
+  }
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 12px #5577ffaa;
+  }
+  100% {
+    text-shadow: 0 0 34px #aab9ffcc;
   }
 }
 
 @keyframes fadeInSlide {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(30px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
