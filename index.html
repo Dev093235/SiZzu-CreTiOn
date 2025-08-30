@@ -2,17 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pro Max Sizzu DP Gallery + Cool Animations</title>
+  <title>Pro Max Sizzu DP Gallery with Full Background Animation</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
   <script src="https://unpkg.com/upscaler@latest/dist/upscaler.min.js"></script>
 </head>
 <body>
-  <!-- Background Animated birds and balloons -->
-  <img src="assets/bird1.png" alt="Flying Bird" class="bird" />
-  <img src="assets/bird2.png" alt="Flying Bird" class="bird" />
-  <img src="assets/balloon1.png" alt="Balloon" class="balloon" />
-  <img src="assets/balloon2.png" alt="Balloon" class="balloon" />
 
   <header class="site-header">
     <img src="assets/cover.jpg" alt="Cover Photo" class="cover-photo" />
@@ -20,7 +15,7 @@
   </header>
 
   <section class="upload-section">
-    <input type="file" id="fileInput" multiple accept="image/*"/>
+    <input type="file" id="fileInput" multiple accept="image/*" />
     <button id="uploadBtn">Simple Upload</button>
     <button id="upscaleBtn">Upscale + Upload</button>
   </section>
@@ -33,10 +28,41 @@
     let photos = JSON.parse(localStorage.getItem("photos") || "[]");
     const upscaler = new Upscaler();
 
+    // Background flying birds and balloons full screen
+    function randomRange(min, max) { return Math.random() * (max - min) + min; }
+
+    function createFlyingObjects() {
+      const body = document.body;
+      document.querySelectorAll('.bird,.balloon').forEach(el => el.remove());
+
+      const birdCount = 12, balloonCount = 10;
+
+      for(let i=0; i < birdCount; i++) {
+        const bird = document.createElement('img');
+        bird.src = 'assets/bird1.png';
+        bird.className = 'bird';
+        bird.style.top = `${randomRange(0, 100)}vh`;
+        bird.style.left = `-${randomRange(10, 100)}px`;
+        bird.style.animationDuration = `${randomRange(15, 30)}s`;
+        bird.style.animationDelay = `${randomRange(0, 15)}s`;
+        body.appendChild(bird);
+      }
+      for(let i=0; i < balloonCount; i++) {
+        const balloon = document.createElement('img');
+        balloon.src = 'assets/balloon1.png';
+        balloon.className = 'balloon';
+        balloon.style.left = `${randomRange(0, 100)}vw`;
+        balloon.style.bottom = `-${randomRange(50, 150)}px`;
+        balloon.style.animationDuration = `${randomRange(20, 35)}s`;
+        balloon.style.animationDelay = `${randomRange(0, 35)}s`;
+        body.appendChild(balloon);
+      }
+    }
+
     function cleanupPhotos() {
       const now = Date.now();
-      photos = photos.filter(p => now - p.timestamp < 24 * 60 * 60 * 1000);
-      localStorage.setItem("photos", JSON.stringify(photos));
+      photos = photos.filter(photo => now - photo.timestamp < 24*60*60*1000);
+      localStorage.setItem('photos', JSON.stringify(photos));
     }
 
     function animateButtons() {
@@ -59,7 +85,7 @@
 
         const img = document.createElement('img');
         img.src = photo.data;
-        img.alt = `DP ${idx + 1}`;
+        img.alt = `DP ${idx+1}`;
         img.classList.add('photo');
 
         const downloadBtn = document.createElement('button');
@@ -68,7 +94,7 @@
         downloadBtn.onclick = () => {
           const link = document.createElement('a');
           link.href = photo.data;
-          link.download = `DP_${idx + 1}.png`;
+          link.download = `DP_${idx+1}.png`;
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
@@ -93,7 +119,7 @@
       const latest = document.getElementById('latestLink');
       latest.innerHTML = `
         <p>Upload successful! Share this link for direct download:</p>
-        <a href="${base64}" download="DP_${idx + 1}.png" class="download-link">Download DP_${idx + 1}</a>
+        <a href="${base64}" download="DP_${idx+1}.png" class="download-link">Download DP_${idx+1}</a>
       `;
       anime({
         targets: '#latestLink',
@@ -105,20 +131,20 @@
     }
 
     document.getElementById('uploadBtn').addEventListener('click', () => {
-      const fileInput = document.getElementById('fileInput');
-      if (!fileInput.files.length) return alert('Select photos first');
-      if (photos.length + fileInput.files.length > MAX_PHOTOS) return alert('Max 50 photos allowed.');
+      const files = document.getElementById('fileInput').files;
+      if (!files.length) return alert('Select photos first');
+      if (photos.length + files.length > MAX_PHOTOS) return alert('Max 50 photos allowed');
 
       let loaded = 0;
-      Array.from(fileInput.files).forEach(file => {
+      Array.from(files).forEach(file => {
         const reader = new FileReader();
         reader.onload = e => {
           photos.push({ data: e.target.result, timestamp: Date.now() });
           loaded++;
-          if (loaded === fileInput.files.length) {
-            localStorage.setItem("photos", JSON.stringify(photos));
+          if (loaded === files.length) {
+            localStorage.setItem('photos', JSON.stringify(photos));
             renderGallery();
-            showLatestLink(photos[photos.length -1].data, photos.length -1);
+            showLatestLink(photos[photos.length-1].data, photos.length-1);
           }
         };
         reader.readAsDataURL(file);
@@ -126,12 +152,12 @@
     });
 
     document.getElementById('upscaleBtn').addEventListener('click', async () => {
-      const fileInput = document.getElementById('fileInput');
-      if (!fileInput.files.length) return alert('Select photos first');
-      if (photos.length + fileInput.files.length > MAX_PHOTOS) return alert('Max 50 photos allowed.');
+      const files = document.getElementById('fileInput').files;
+      if (!files.length) return alert('Select photos first');
+      if (photos.length + files.length > MAX_PHOTOS) return alert('Max 50 photos allowed');
 
       let loaded = 0;
-      for (const file of fileInput.files) {
+      for (const file of files) {
         const base64 = await new Promise(resolve => {
           const reader = new FileReader();
           reader.onload = e => resolve(e.target.result);
@@ -144,10 +170,10 @@
           photos.push({ data: base64, timestamp: Date.now() });
         }
         loaded++;
-        if (loaded === fileInput.files.length) {
-          localStorage.setItem("photos", JSON.stringify(photos));
+        if (loaded === files.length) {
+          localStorage.setItem('photos', JSON.stringify(photos));
           renderGallery();
-          showLatestLink(photos[photos.length -1].data, photos.length -1);
+          showLatestLink(photos[photos.length-1].data, photos.length-1);
         }
       }
     });
@@ -155,6 +181,7 @@
     cleanupPhotos();
     renderGallery();
     animateButtons();
+    createFlyingObjects();
   </script>
 </body>
 </html>
