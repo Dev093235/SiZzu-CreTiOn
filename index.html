@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pro Max DP Gallery + Upscale</title>
+  <title>Pro Max Sizzu DP Gallery + Cool Animations</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
   <script src="https://unpkg.com/upscaler@latest/dist/upscaler.min.js"></script>
 </head>
 <body>
+  <!-- Background Animated birds and balloons -->
+  <img src="assets/bird1.png" alt="Flying Bird" class="bird" />
+  <img src="assets/bird2.png" alt="Flying Bird" class="bird" />
+  <img src="assets/balloon1.png" alt="Balloon" class="balloon" />
+  <img src="assets/balloon2.png" alt="Balloon" class="balloon" />
+
   <header class="site-header">
     <img src="assets/cover.jpg" alt="Cover Photo" class="cover-photo" />
     <h1>Pro Max Sizzu DP Gallery</h1>
@@ -25,7 +31,6 @@
   <script>
     const MAX_PHOTOS = 50;
     let photos = JSON.parse(localStorage.getItem("photos") || "[]");
-
     const upscaler = new Upscaler();
 
     function cleanupPhotos() {
