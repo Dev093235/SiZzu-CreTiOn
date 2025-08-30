@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sizzu Creations Animated DP Gallery</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <img src="assets/cover.jpg" alt="Cover Photo" class="cover-photo" />
+    <h1>Sizzu Creations</h1>
+  </header>
+
+  <section class="upload-section">
+    <label for="fileInput" class="upload-label">Select photos to upload (max 50)</label>
+    <input type="file" id="fileInput" multiple accept="image/*" />
+  </section>
+
+  <section id="gallery" class="gallery"></section>
+
+  <script>
+    const MAX_PHOTOS = 50;
+    let photos = JSON.parse(localStorage.getItem("photos") || "[]");
+
+    function autoDeleteOldPhotos() {
+      const now = Date.now();
+      photos = photos.filter(photo => now - photo.timestamp < 24 * 60 * 60 * 1000);
+      localStorage.setItem("photos", JSON.stringify(photos));
+    }
+
+    function renderGallery() {
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = '';
+      photos.forEach((photo, idx) => {
+        const img = document.createElement('img');
+        img.src = photo.data;
+        img.alt = `DP ${idx + 1}`;
+        img.classList.add('photo');
+        img.style.animationDelay = `${idx * 0.1}s`;
+        gallery.appendChild(img);
+      });
+    }
+
+    document.getElementById('fileInput').addEventListener('change', (e) => {
+      const files = Array.from(e.target.files);
+      if (photos.length + files.length > MAX_PHOTOS) {
+        alert('Max 50 photos allowed.');
+        return;
+      }
+      let loaded = 0;
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          photos.push({ data: event.target.result, timestamp: Date.now() });
+          loaded++;
+          if (loaded === files.length) {
+            localStorage.setItem('photos', JSON.stringify(photos));
+            renderGallery();
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    autoDeleteOldPhotos();
+    renderGallery();
+  </script>
+</body>
+</html>
