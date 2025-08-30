@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <title>Pro Max Sizzu DP Gallery</title>
@@ -11,6 +11,14 @@
     <h1>Pro Max Sizzu DP Gallery</h1>
   </header>
 
+  <!-- Birds animation -->
+  <img src="assets/bird1.png" class="bird" style="top: 30px; animation-duration: 18s;"/>
+  <img src="assets/bird2.png" class="bird" style="top: 40px; animation-duration: 15s;" />
+  
+  <!-- Balloons animation -->
+  <img src="assets/balloon1.png" class="balloon" style="left: 50px; animation-duration: 20s;" />
+  <img src="assets/balloon2.png" class="balloon" style="left: 130px; animation-duration: 16s;" />
+  
   <section class="upload-section">
     <input type="file" id="fileInput" multiple accept="image/*" />
     <button id="uploadBtn">Upload Photos</button>
@@ -22,7 +30,6 @@
     async function uploadPhotos(files) {
       const formData = new FormData();
       for (const file of files) formData.append('photos', file);
-
       try {
         const res = await fetch('/upload', {
           method: 'POST',
@@ -31,8 +38,8 @@
         const data = await res.json();
         alert(`Uploaded ${data.uploaded.length} photos.`);
         fetchGallery();
-      } catch (err) {
-        alert('Upload failed: ' + err);
+      } catch (error) {
+        alert('Upload failed: ' + error);
       }
     }
 
@@ -52,8 +59,8 @@
           div.appendChild(img);
           gallery.appendChild(div);
         });
-      } catch (err) {
-        console.error('Failed to fetch gallery', err);
+      } catch (error) {
+        console.error('Failed to fetch gallery', error);
       }
     }
 
